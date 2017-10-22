@@ -1,0 +1,41 @@
+<div class="login-page">
+		<div class="form">
+
+			<!-- <form class="register-form" action="<c:url value='/users/enroll'/>" method="post">
+				<input type="text" id="email" name="email" placeholder="Email" />
+				<input type="password" id="password" name="password" placeholder="Password" />
+				<button type="submit">create</button>
+				<p class="message">Already registered? <a href="#">Sign In</a></p>
+			</form> -->
+
+			<!-- <form class="login-form" action="<c:url value='/login'/>" method="post">
+				<input type="text" id="email" name="email" placeholder="Email" value="${login.email }"/>
+				<input type="password" id="password" name="password" placeholder="Password" />
+				<button type="submit">login</button>
+				<p class="message">Not registered? <a href="#">Create an account</a></p>
+				<c:if test="${not empty error }">
+					<br>
+					<span class="label label-danger">${error }</span>
+				</c:if>
+			</form> -->
+
+			<form name="form" class="login-form" (ngSubmit)="f.form.valid && login(f)" #f="ngForm" novalidate>
+        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !mEmail.valid }">
+            <label for="mEmail">Email</label>
+            <input type="text" class="form-control" name="mEmail" placeholder="Email" [(ngModel)]="model.mEmail" #mEmail="ngModel" required />
+            <div *ngIf="f.submitted && !mEmail.valid" class="help-block">Email is required</div>
+        </div>
+        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !mPassword.valid }">
+            <label for="mPassword">Password</label>
+            <input type="password" class="form-control" name="mPassword" placeholder="Password" [(ngModel)]="model.mPassword" #mPassword="ngModel" required />
+            <div *ngIf="f.submitted && !mPassword.valid" class="help-block">Password is required</div>
+        </div>
+        <div class="form-group">
+            <button [disabled]="loading" class="btn btn-primary">Login</button>
+        </div>
+        <p class="message">Not registered? <a href="#">Create an account</a></p>
+        <div *ngIf="error" class="alert alert-danger">{{error}}</div>
+			</form>
+
+		</div>
+	</div>
