@@ -32,7 +32,7 @@ export class AuthenticationService {
       .map((currentUser: User) => {
         if (!User.isNull(currentUser)) {
           console.log('JSON.stringify(currentUser)=' + JSON.stringify({currentUser}))
-          localStorage.setItem("parseUser", JSON.stringify({currentUser}));
+          localStorage.setItem("currentUser", JSON.stringify({currentUser}));
           this.isLoggedIn = true;
           return true;
         } else {

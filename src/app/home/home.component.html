@@ -1,4 +1,4 @@
-<div class="col-md-6 col-md-offset-3">
+<!-- <div class="col-md-6 col-md-offset-3">
   <h1>Home</h1>
   <div>
     <ul>
@@ -10,4 +10,30 @@
 <div class="col-md-6 col-md-offset-3">
   <h3>Welcome!</h3>
   <button pButton type="button" (ngClick)="logOut()">Logout</button>
-</div>
+</div> -->
+<div id="services" class="container-fluid text-center">
+		<h2>BOARD DEMO</h2>
+		<h4>Spring Boot + MyBatis</h4>
+		<br>
+		<div class="row slideanim">
+			<div class="col-sm-4">
+				<span class="glyphicon glyphicon-off logo-small"></span>
+				<h4>
+          <a *ngIf="user" href="logout">LOGOUT</a>
+          <a *ngIf="!user" href="login">LOGIN</a>
+          <a *ngIf="!user" href="login">LOGIN</a>
+				</h4>
+				<p>Lorem ipsum dolor sit amet..</p>
+			</div>
+			<div class="col-sm-4">
+				<span class="glyphicon glyphicon-heart logo-small"></span>
+				<h4><a href="truck-list">BOARD</a></h4>
+				<p>Lorem ipsum dolor sit amet..</p>
+			</div>
+			<div class="col-sm-4">
+				<span class="glyphicon glyphicon-lock logo-small"></span>
+				<h4>YOUR TURN</h4>
+				<p>Lorem ipsum dolor sit amet..</p>
+			</div>
+		</div>
+	</div>

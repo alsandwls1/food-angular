@@ -13,7 +13,7 @@ import { AuthenticationService } from '../_services/authentication.service';
 })
 export class HomeComponent implements OnInit {
 
-  user: User;
+  user: string;
 
   constructor(private userService: UserService, private authService: AuthenticationService, private router: Router) { }
 
@@ -23,9 +23,10 @@ export class HomeComponent implements OnInit {
     //   .subscribe(users => {
     //     this.users = users;
     //   });
-    var email = localStorage.getItem("currentUser");
-    console.log('email'+email);
-    
+    console.log('localStorage='+localStorage.getItem("currentUser"));
+    this.user = localStorage.getItem("currentUser");
+    console.log(this.user.valueOf);
+
   //   this.userService.getUser(email)
   //     .subscribe(user => {
   //       this.user = user;
@@ -35,7 +36,7 @@ export class HomeComponent implements OnInit {
   logout(): void {
     this.authService.logout().subscribe(isLoggedIn => {
       if (isLoggedIn === false) {
-        this.router.navigateByUrl('/');
+        this.router.navigateByUrl('/login');
       }
     });
   }
