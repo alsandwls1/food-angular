@@ -20,18 +20,18 @@
 			</form> -->
 
 			<form name="form" class="login-form" (ngSubmit)="f.form.valid && login(f)" #f="ngForm" novalidate>
-        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !mEmail.valid }">
-            <label for="mEmail">Email</label>
-            <input type="text" class="form-control" name="mEmail" placeholder="Email" [(ngModel)]="model.mEmail" #mEmail="ngModel" required />
-            <div *ngIf="f.submitted && !mEmail.valid" class="help-block">Email is required</div>
+        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !memail.valid }">
+            <label for="memail">Email</label>
+            <input type="text" class="form-control" name="memail" placeholder="Email" [(ngModel)]="model.memail" #memail="ngModel" required />
+            <div *ngIf="f.submitted && !memail.valid" class="help-block">Email is required</div>
         </div>
-        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !mPassword.valid }">
-            <label for="mPassword">Password</label>
-            <input type="password" class="form-control" name="mPassword" placeholder="Password" [(ngModel)]="model.mPassword" #mPassword="ngModel" required />
-            <div *ngIf="f.submitted && !mPassword.valid" class="help-block">Password is required</div>
+        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !mpassword.valid }">
+            <label for="mpassword">Password</label>
+            <input type="password" class="form-control" name="mpassword" placeholder="Password" [(ngModel)]="model.mpassword" #mpassword="ngModel" required />
+            <div *ngIf="f.submitted && !mpassword.valid" class="help-block">Password is required</div>
         </div>
         <div class="form-group">
-            <button [disabled]="loading" class="btn btn-primary">Login</button>
+            <button class="btn btn-primary">Login</button>
         </div>
         <p class="message">Not registered? <a href="#">Create an account</a></p>
         <div *ngIf="error" class="alert alert-danger">{{error}}</div>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
-import { User } from '../_models/user.model';
+import { Member } from '../_models/member.model';
 import { UserService } from '../_services/user.service';
 
 @Component({
@@ -9,15 +10,20 @@ import { UserService } from '../_services/user.service';
   styleUrls: ['./nav-top.component.css']
 })
 export class NavTopComponent implements OnInit {
-  users: User[] = [];
+  member: string;
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private router: Router) { }
 
   ngOnInit() {
-    // get users from secure api end point
-    this.userService.getUsers()
-      .subscribe(users => {
-        this.users = users;
-      });
+    console.log('nav # sessionStorage=' + sessionStorage.getItem("member"));
+    this.member = sessionStorage.getItem("member");
   }
+
+  logout() {
+    console.log('logout#sessionStorage=' + sessionStorage.getItem('member'));
+    sessionStorage.removeItem("member");
+    console.log('logout#sessionStorage remove=' + sessionStorage.getItem('member'));
+    this.router.navigate(['/login']);
+  }
+
 }

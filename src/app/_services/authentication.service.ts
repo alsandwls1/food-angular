@@ -7,40 +7,30 @@ import { Observable } from 'rxjs';
 
 import 'rxjs/add/operator/map';
 
-import {User} from '../_models/user.model';
+import {Member} from '../_models/member.model';
 
 @Injectable()
 export class AuthenticationService {
-  authUrl: string = "http://localhost:8080/api";
-
+  loginUrl: string = "http://localhost:8080/members";
   isLoggedIn = false;
+  private headers = new Headers({ 'Content-Type': 'application/json; charset=utf-8' });
+
   constructor(private http: Http) { }
 
-  private static handleError(error: any) {
-    const errorMessage = (error.message) ? error.message :
-      error.status ? `${error.status} - ${error.statusText}` : `Server error`;
-    console.log(errorMessage);
-    return Observable.throw(errorMessage);
-  }
+  login(email: string, password: string): Observable<Member> {
+    const url = `${this.loginUrl}/login`;
+    let headers = new Headers({ 'Content-Type':'application/json;  charset=utf-8', 'Accept' : 'application/json'})
+    let options = new RequestOptions({ headers : headers});
+    let member = {"mEmail": email, "mPassword": password}
 
-  login(user: User): Observable<boolean> {
-    console.log('user='+user);
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    return this.http.post(this.authUrl + '/login', JSON.stringify(user), { headers: headers })
-      .map(res => res.json())
-      .map((currentUser: User) => {
-        if (!User.isNull(currentUser)) {
-          console.log('JSON.stringify(currentUser)=' + JSON.stringify({currentUser}))
-          localStorage.setItem("currentUser", JSON.stringify({currentUser}));
-          this.isLoggedIn = true;
-          return true;
-        } else {
-          this.isLoggedIn = false;
-          return false;
-        }
+    return this.http.post(url, JSON.stringify(member), options)
+      .map(res => {
+        let json = res.text();
+        // localStorage.setItem("member", json);
+        console.log('service login# json(res.text)=' + json);
+        json = JSON.parse(json);
+        return json || {};
       })
-      .catch(AuthenticationService.handleError);
   }
 
   logout(): Observable<boolean> {
@@ -49,12 +39,12 @@ export class AuthenticationService {
     return Observable.of(false);
   }
 
-  register(user: User): Observable<boolean> {
-    return this.http.post(this.authUrl + '/register', user)
-      .map(response => response.json() as User)
-      .map(currentUser => !User.isNull(currentUser))
-      .catch(AuthenticationService.handleError);
-  }
+  // register(user: User): Observable<boolean> {
+  //   return this.http.post(this.authUrl + '/register', user)
+  //     .map(response => response.json() as User)
+  //     .map(currentUser => !User.isNull(currentUser))
+  //     .catch(AuthenticationService.handleError);
+  // }
 
 
   // public token: string;

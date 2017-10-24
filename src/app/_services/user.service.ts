@@ -4,12 +4,12 @@ import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map'
 
 import { AuthenticationService } from '../_services/authentication.service';
-import { User } from '../_models/user.model';
+import { Member } from '../_models/member.model';
 
 @Injectable()
 export class UserService {
 
-  userUrl: string = "http://localhost:8080/api";
+  userUrl: string = "http://localhost:8080/members";
 
   constructor(
     private http: Http,
@@ -26,15 +26,15 @@ export class UserService {
   //     .map((response: Response) => response.json());
   // }
 
-  getUsers(): Observable<User[]> {
-    console.log('getUsers() working.');
-    return this.http.get(this.userUrl + '/users')
-      .map(response => response.json() as User[]);
-  }
-
-  getUser(userId: string): Observable<User> {
-    return this.http.get(this.userUrl + '/user/' + userId)
-      .map(response => response.json());
-  }
+  // getUsers(): Observable<User[]> {
+  //   console.log('getUsers() working.');
+  //   return this.http.get(this.userUrl + '/users')
+  //     .map(response => response.json() as User[]);
+  // }
+  //
+  // getUser(userId: string): Observable<User> {
+  //   return this.http.get(this.userUrl + '/user/' + userId)
+  //     .map(response => response.json());
+  // }
 
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { User } from '../_models/user.model';
+import { Member } from '../_models/member.model';
 
 import { UserService } from '../_services/user.service';
 import { AuthenticationService } from '../_services/authentication.service';
@@ -13,32 +13,28 @@ import { AuthenticationService } from '../_services/authentication.service';
 })
 export class HomeComponent implements OnInit {
 
-  user: string;
+  member: string;
 
   constructor(private userService: UserService, private authService: AuthenticationService, private router: Router) { }
 
   ngOnInit() {
-    // get users from secure api end point
-    // this.userService.getUsers()
-    //   .subscribe(users => {
-    //     this.users = users;
-    //   });
-    console.log('localStorage='+localStorage.getItem("currentUser"));
-    this.user = localStorage.getItem("currentUser");
-    console.log(this.user.valueOf);
+    // console.log('localStorage='+localStorage.getItem("member"));
+    // this.member = localStorage.getItem("member");
 
-  //   this.userService.getUser(email)
-  //     .subscribe(user => {
-  //       this.user = user;
-  //     })
+    console.log('sessionStorage='+sessionStorage.getItem("member"));
+    this.member = sessionStorage.getItem("member");
   }
 
-  logout(): void {
-    this.authService.logout().subscribe(isLoggedIn => {
-      if (isLoggedIn === false) {
-        this.router.navigateByUrl('/login');
-      }
-    });
+  logout() {
+    console.log('logout#sessionStorage=' + sessionStorage.getItem('member'));
+    sessionStorage.removeItem("member");
+    console.log('logout#sessionStorage remove=' + sessionStorage.getItem('member'));
+    this.router.navigate(['/login']);
+
+    // console.log('logout#localStorage=' + localStorage.getItem('member'));
+    // localStorage.removeItem("member");
+    // console.log('logout#localStorage remove=' + localStorage.getItem('member'));
+    // this.router.navigate(['/login']);
   }
 
 }
