@@ -26,15 +26,7 @@ export class HomeComponent implements OnInit {
   }
 
   logout() {
-    console.log('logout#sessionStorage=' + sessionStorage.getItem('member'));
-    sessionStorage.removeItem("member");
-    console.log('logout#sessionStorage remove=' + sessionStorage.getItem('member'));
-    this.router.navigate(['/login']);
-
-    // console.log('logout#localStorage=' + localStorage.getItem('member'));
-    // localStorage.removeItem("member");
-    // console.log('logout#localStorage remove=' + localStorage.getItem('member'));
-    // this.router.navigate(['/login']);
+    this.authService.logout();
   }
 
 }

@@ -9,13 +9,22 @@ import { Member } from '../_models/member.model';
 @Injectable()
 export class UserService {
 
-  userUrl: string = "http://localhost:8080/members";
+  memberUrl: string = "http://localhost:8080/members";
 
   constructor(
     private http: Http,
     private authenticationService: AuthenticationService) {
   }
 
+  getMember(memail: string): Observable<Member> {
+    return this.http.get(this.memberUrl+'/memail')
+    .map(res => {
+      let json = res.text();
+      json = JSON.parse(json);
+      console.log('getMember# json = '+json)
+      return json || {};
+    });
+  }
   // getUsers(): Observable<User[]> {
   //   // add authorization header with jwt token
   //   let headers = new Headers({ 'Authorization': 'Bearer ' + this.authenticationService.token });

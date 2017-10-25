@@ -15,15 +15,22 @@ export class NavTopComponent implements OnInit {
   constructor(private userService: UserService, private router: Router) { }
 
   ngOnInit() {
-    console.log('nav # sessionStorage=' + sessionStorage.getItem("member"));
+    console.log('nav # ngOnInit # sessionStorage=' + sessionStorage.getItem("member"));
     this.member = sessionStorage.getItem("member");
+    this.getMember();
+  }
+
+  getMember() {
+    console.log(this.userService.getMember(this.member))
+    return this.userService.getMember(this.member)
+
   }
 
   logout() {
     console.log('logout#sessionStorage=' + sessionStorage.getItem('member'));
     sessionStorage.removeItem("member");
     console.log('logout#sessionStorage remove=' + sessionStorage.getItem('member'));
-    this.router.navigate(['/login']);
   }
+
 
 }

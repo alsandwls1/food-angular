@@ -19,8 +19,8 @@
 			<div class="col-sm-4">
 				<span class="glyphicon glyphicon-off logo-small"></span>
 				<h4>
-          <a *ngIf="member" routerLink="login" (click)="logout()">LOGOUT</a>
-          <a *ngIf="!member" href="login">LOGIN</a>
+          <a *ngIf="member" [routerLink]="['/login']" (click)="logout()">LOGOUT</a>
+          <a *ngIf="!member" [routerLink]="['/login']">LOGIN</a>
 				</h4>
 				<p>Lorem ipsum dolor sit amet..</p>
 			</div>
