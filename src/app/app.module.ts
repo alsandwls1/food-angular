@@ -17,6 +17,7 @@ import { FoodListComponent } from './food-list/food-list.component';
 import { AuthenticationService } from './_services/authentication.service';
 import { UserService } from './_services/user.service';
 import { FileService } from './_services/file.service';
+import { HotlistService } from './_services/hotlist.service';
 
 
 @NgModule({
@@ -40,6 +41,7 @@ import { FileService } from './_services/file.service';
     AuthenticationService,
     UserService,
     FileService,
+    HotlistService,
   ],
   bootstrap: [AppComponent]
 })

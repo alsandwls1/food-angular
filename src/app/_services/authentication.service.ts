@@ -36,13 +36,6 @@ export class AuthenticationService {
       });
   }
 
-  // logout() {
-  //   this.isLoggedIn = !this.isLoggedIn;
-  //   console.log('logout#sessionStorage=' + sessionStorage.getItem('member'));
-  //   sessionStorage.removeItem("member");
-  //   console.log('logout#sessionStorage remove=' + sessionStorage.getItem('member'));
-  // }
-
   logout() {
     const url = `${this.loginUrl}/logout`;
     return this.http.post(url, {})

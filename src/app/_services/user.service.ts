@@ -17,8 +17,10 @@ export class UserService {
   }
 
   getMember(memail: string): Observable<Member> {
-    return this.http.get(this.memberUrl+'/memail')
+    var url = this.memberUrl + "/" +sessionStorage.getItem('member');
+    return this.http.get(url)
     .map(res => {
+      console.log(url)
       let json = res.text();
       json = JSON.parse(json);
       console.log('getMember# json = '+json)
