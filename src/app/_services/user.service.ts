@@ -10,6 +10,7 @@ import { Member } from '../_models/member.model';
 export class UserService {
 
   memberUrl: string = "http://localhost:8080/members";
+  message: string;
 
   constructor(
     private http: Http,
@@ -17,35 +18,40 @@ export class UserService {
   }
 
   getMember(memail: string): Observable<Member> {
-    var url = this.memberUrl + "/" +sessionStorage.getItem('member');
+    var url = this.memberUrl + "/" + sessionStorage.getItem('member');
     return this.http.get(url)
-    .map(res => {
-      console.log(url)
-      let json = res.text();
-      json = JSON.parse(json);
-      console.log('getMember# json = '+json)
-      return json || {};
-    });
+      .map(this.extractDataForObject)
+      ._catch(this.handleError);
   }
-  // getUsers(): Observable<User[]> {
-  //   // add authorization header with jwt token
-  //   let headers = new Headers({ 'Authorization': 'Bearer ' + this.authenticationService.token });
-  //   let options = new RequestOptions({ headers: headers });
-  //
-  //   // get users from api
-  //   return this.http.get(this.userUrl, options)
-  //     .map((response: Response) => response.json());
-  // }
 
-  // getUsers(): Observable<User[]> {
-  //   console.log('getUsers() working.');
-  //   return this.http.get(this.userUrl + '/users')
-  //     .map(response => response.json() as User[]);
-  // }
-  //
-  // getUser(userId: string): Observable<User> {
-  //   return this.http.get(this.userUrl + '/user/' + userId)
-  //     .map(response => response.json());
-  // }
+  addMember(email: string, password: string, nickname: string): Observable<Member> {
+    let headers = new Headers({ 'Content-Type': 'application/json', 'Accept': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
+    let member = { "mEmail": email, "mPassword": password, "mNickname": nickname };
+    console.log('member = ' + JSON.stringify(member));
+
+    return this.http.post(this.memberUrl, JSON.stringify(member), options)
+      .map(this.extractDataForObject)
+      .catch(this.handleError);
+  }
+
+  private extractDataForObject(res: Response) {
+    let json = res.text();
+    console.log(json);
+    json = JSON.parse(json);
+    return json || {};
+  }
+
+  private extractData(res: Response) {
+    console.log('extractData#res = ' + JSON.stringify(res));
+    let json = res.text();
+    json = JSON.parse(json);
+    return json || [];
+  }
+
+  private handleError(res: Response) {
+    console.log("Erroe = " + res);
+    return Observable.throw(res.json().error || 'Server Down');
+  }
 
 }

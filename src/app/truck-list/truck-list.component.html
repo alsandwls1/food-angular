@@ -6,11 +6,13 @@
     <div class="form-group">
       <label for="htruck" class="control-label col-xs-2">truckID</label>
       <div class="col-xs-10">
-        <input type="text" class="form-control" id="htruck" name="htruck" required>
+        <input type="text" class="form-control" [(ngModel)]="htruck" name="htruck" required>
       </div>
     </div>
     <div class="form-group">
       <div class="col-xs-offset-2 col-xs-10">
+        <div *ngIf="message" class="alert alert-danger">{{message}}</div>
+        <!-- <div *ngIf="!message" class="alert alert-success">Success!</div> -->
         <button type="submit" class="btn btn-primary">Add</button>
       </div>
     </div>

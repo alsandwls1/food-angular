@@ -1,41 +1,22 @@
 <div class="login-page">
-		<div class="form">
+	<div class="form">
+		<form name="form" class="login-form" (ngSubmit)="f.form.valid && login(f)" #f="ngForm" novalidate>
+      <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !memail.valid }">
+        <label for="memail">Email</label>
+        <input type="text" class="form-control" name="memail" placeholder="Email" [(ngModel)]="model.memail" #memail="ngModel"  required />
+        <div *ngIf="f.submitted && !memail.valid" class="help-block">Email is required</div>
+      </div>
+      <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !mpassword.valid }">
+        <label for="mpassword">Password</label>
+        <input type="password" class="form-control" name="mpassword" placeholder="Password" [(ngModel)]="model.mpassword" #mpassword="ngModel" required />
+        <div *ngIf="f.submitted && !mpassword.valid" class="help-block">Password is required</div>
+      </div>
+      <div class="form-group">
+          <button class="btn btn-primary" [disabled]="f.invalid">Login</button>
+      </div>
+      <p class="message">Not registered? <a href="#">Create an account</a></p>
+      <div *ngIf="error" class="alert alert-danger">{{error}}</div>
+		</form>
 
-			<!-- <form class="register-form" action="<c:url value='/users/enroll'/>" method="post">
-				<input type="text" id="email" name="email" placeholder="Email" />
-				<input type="password" id="password" name="password" placeholder="Password" />
-				<button type="submit">create</button>
-				<p class="message">Already registered? <a href="#">Sign In</a></p>
-			</form> -->
-
-			<!-- <form class="login-form" action="<c:url value='/login'/>" method="post">
-				<input type="text" id="email" name="email" placeholder="Email" value="${login.email }"/>
-				<input type="password" id="password" name="password" placeholder="Password" />
-				<button type="submit">login</button>
-				<p class="message">Not registered? <a href="#">Create an account</a></p>
-				<c:if test="${not empty error }">
-					<br>
-					<span class="label label-danger">${error }</span>
-				</c:if>
-			</form> -->
-
-			<form name="form" class="login-form" (ngSubmit)="f.form.valid && login(f)" #f="ngForm" novalidate>
-        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !memail.valid }">
-            <label for="memail">Email</label>
-            <input type="text" class="form-control" name="memail" placeholder="Email" [(ngModel)]="model.memail" #memail="ngModel" required />
-            <div *ngIf="f.submitted && !memail.valid" class="help-block">Email is required</div>
-        </div>
-        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !mpassword.valid }">
-            <label for="mpassword">Password</label>
-            <input type="password" class="form-control" name="mpassword" placeholder="Password" [(ngModel)]="model.mpassword" #mpassword="ngModel" required />
-            <div *ngIf="f.submitted && !mpassword.valid" class="help-block">Password is required</div>
-        </div>
-        <div class="form-group">
-            <button class="btn btn-primary">Login</button>
-        </div>
-        <p class="message">Not registered? <a href="#">Create an account</a></p>
-        <div *ngIf="error" class="alert alert-danger">{{error}}</div>
-			</form>
-
-		</div>
 	</div>
+</div>

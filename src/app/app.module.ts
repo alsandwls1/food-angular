@@ -18,6 +18,8 @@ import { AuthenticationService } from './_services/authentication.service';
 import { UserService } from './_services/user.service';
 import { FileService } from './_services/file.service';
 import { HotlistService } from './_services/hotlist.service';
+import { RegisterComponent } from './register/register.component';
+import { CanivalComponent } from './canival/canival.component';
 
 
 @NgModule({
@@ -27,7 +29,9 @@ import { HotlistService } from './_services/hotlist.service';
     LoginComponent,
     TruckListComponent,
     NavTopComponent,
-    FoodListComponent
+    FoodListComponent,
+    RegisterComponent,
+    CanivalComponent
   ],
   imports: [
     BrowserModule,

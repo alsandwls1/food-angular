@@ -26,7 +26,10 @@ export class HomeComponent implements OnInit {
   }
 
   logout() {
-    this.authService.logout();
+    this.authService.logout()
+    .subscribe(success => {
+      sessionStorage.removeItem("member");
+    });
   }
 
 }

@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 
 import 'rxjs/add/operator/map';
 
-import {Member} from '../_models/member.model';
+import { Member } from '../_models/member.model';
 
 @Injectable()
 export class AuthenticationService {
@@ -33,16 +33,19 @@ export class AuthenticationService {
         console.log('service login# json(res.text)=' + json);
         json = JSON.parse(json);
         return json || {};
-      });
+      })
+      ._catch(this.handleError);
   }
 
   logout() {
     const url = `${this.loginUrl}/logout`;
     return this.http.post(url, {})
       .map(res => res)
-      .subscribe(success => {
-        sessionStorage.removeItem("member");
-      });
+      ._catch(this.handleError)
   }
 
+  private handleError(res: Response) {
+    console.log("Erroe = " + res);
+    return Observable.throw(res.json().error || 'Server Down');
+  }
 }

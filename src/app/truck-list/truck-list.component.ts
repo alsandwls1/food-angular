@@ -14,9 +14,11 @@ export class TruckListComponent implements OnInit {
   hotlist: Hotlist;
   trucks: Truck[];
 
+  message: string;
   member = sessionStorage.getItem('member');
 
-  constructor(private hotlistService: HotlistService,
+  constructor(
+    private hotlistService: HotlistService,
     private http: Http) { }
 
   ngOnInit() {
@@ -24,6 +26,17 @@ export class TruckListComponent implements OnInit {
   }
 
   onSubmit(f) {
+    if(f.valid) {
+      this.addHotlist(this.member, f.value.htruck);
+    }
+  }
+
+  addHotlist(hmember:string, htruck:string) {
+    this.hotlistService.addHotlist(hmember, htruck)
+    .subscribe(result => {
+      // this.message = result;
+      this.message = result.herror;
+    });
 
   }
 
